@@ -1,0 +1,16 @@
+PODS:
+  - ZCRMiOS (1.2.16)
+
+DEPENDENCIES:
+  - ZCRMiOS (from `/Users/zu-ios/Downloads/Login Handled/ios-sdk-internal`)
+
+EXTERNAL SOURCES:
+  ZCRMiOS:
+    :path: "/Users/zu-ios/Downloads/Login Handled/ios-sdk-internal"
+
+SPEC CHECKSUMS:
+  ZCRMiOS: fbbc4bc89d038ff86cf7874ec2babf3398f8ad45
+
+PODFILE CHECKSUM: 49c48f6f1ea11b0bd1c62214e1e0220738d01ef1
+
+COCOAPODS: 1.8.4
