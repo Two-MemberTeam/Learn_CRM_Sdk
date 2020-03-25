@@ -10,13 +10,14 @@ import UIKit
 import ZCRMiOS
 
 protocol customViewDelegate : class{
-    func changeToCustomView(_ lead_Status : String)
+    func changeToCustomView(_ leadStatus : String , _ cvRow : Int)
 }
-
 
 class CustomViewsViewController: UIViewController {
 
     let customViewTableView : UITableView = UITableView()
+    var customViews : [ZCRMCustomView] = [ZCRMCustomView]()
+
     var customViewRecords : [[String : Any]] = [[String : Any]]()
     var module_Name : String!
     var cv_Delegate : customViewDelegate?
@@ -24,7 +25,6 @@ class CustomViewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCustomViewTableView()
-        self.getRecords()
 
     }
     
@@ -32,45 +32,10 @@ class CustomViewsViewController: UIViewController {
         self.view.addSubview(customViewTableView)
         customViewTableView.delegate = self
         customViewTableView.dataSource = self
-        customViewTableView.register(UITableViewCell.self, forCellReuseIdentifier: "records")
+        customViewTableView.register(UITableViewCell.self, forCellReuseIdentifier: "customView")
         
         self.addConstraint(whichView: customViewTableView, forView: self.view, top: 60, bottom: -30, leading: 20, trailing: -10)
         
-    }
-    
-    func getRecords(){
-        let recordUrlString = "https://www.zohoapis.com/crm/v2/settings/custom_views?module=\(module_Name!)"
-        let recordUrl : URL
-            = URL(string: recordUrlString)!
-        
-        ZohoAuth.getOauth2Token { ( token, error ) in
-            if error == nil {
-                var request = URLRequest(url: recordUrl)
-                let oauthtoken = "Zoho-oauthtoken \(token!)"
-                request.setValue(oauthtoken, forHTTPHeaderField: "Authorization")
-                
-                let session = URLSession.shared
-                
-                let task = session.dataTask(with: request) { (data, responce, error) in
-                    if error == nil {
-                        do{
-                            if let json : [String : Any] = try (JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any]) {
-                                print(json)
-                                if let customViewRecords : [[String : Any]] = json["custom_views"] as? [[String : Any]]{
-                                    self.customViewRecords = customViewRecords
-                                    DispatchQueue.main.async {
-                                        self.customViewTableView.reloadData()
-                                    }
-                                }
-                            }
-                        }catch{
-                            print("error - \(error)")
-                        }
-                    }
-                }
-                task.resume()
-            }
-        }
     }
     
     
@@ -89,24 +54,21 @@ class CustomViewsViewController: UIViewController {
 
 extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return customViewRecords.count
+        return customViews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = customViewTableView.dequeueReusableCell(withIdentifier: "records", for: indexPath)
+        let cell = customViewTableView.dequeueReusableCell(withIdentifier: "customView", for: indexPath)
         
-        let objectOfModule = customViewRecords[indexPath.row]
-        if let name = (objectOfModule["display_value"] ){
-            cell.textLabel?.text = "\(name)"
-        }
+        let objectOfCustomView = customViews[indexPath.row]
+        cell.textLabel?.text = objectOfCustomView.displayName as? String
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let objectOfLead = customViewRecords[indexPath.row]
-        let Lead_Status : String = objectOfLead["display_value"] as! String
+        let LeadStatus : String = customViews[indexPath.row].displayName as! String
         
-        cv_Delegate?.changeToCustomView(Lead_Status)
+        cv_Delegate?.changeToCustomView(LeadStatus , indexPath.row)
         
         self.dismiss(animated: false, completion: nil)
 
@@ -114,3 +76,7 @@ extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSourc
     
     
 }
+
+
+
+

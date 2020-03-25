@@ -13,14 +13,19 @@ class personViewController: UIViewController {
     
     let modulesTableView : UITableView = UITableView()
     let personImageView : UIImageView = UIImageView()
-    var person : [String : Any] = [String : Any]()
-    let personKeys : [String] = ["Designation", "$review_process", "$approval", "$state", "Country", "Created_By", "Phone", "$converted_detail", "Full_Name", "City", "Email", "Skype_ID", "$approved", "Record_Image", "Fax", "$converted", "Created_Time", "Street", "$review", "No_of_Employees", "Website", "Secondary_Email", "Modified_By", "Industry", "$process_flow", "Modified_Time", "Description", "Owner", "Twitter", "Zip_Code", "Lead_Source", "Email_Opt_Out", "$orchestration", "Last_Activity_Time", "First_Name", "Salutation", "Rating", "Annual_Revenue", "$currency_symbol", "Company", "$editable", "Lead_Status", "Last_Name", "Tag", "id", "Mobile", "State"]
+    var crmRecord : [ZCRMRecord] = [ZCRMRecord]()
+
     
+    
+    var person : [String : Any] = [String : Any]()
+    let personKeys : [String] = ["First_Name","Last_Name","Designation","Company","Lead_Source","Industry","Email","Skype_ID","Street","City","Country","Phone","Mobile"]
+    
+    //["Designation",  "Country", "Created_By", "Phone",  "Full_Name", "City", "Email", "Skype_ID", "Record_Image", "Fax", "Street", "No_of_Employees", "Website", "Secondary_Email", "Modified_By", "Industry",  "Modified_Time", "Description", "Owner", "Twitter", "Zip_Code", "Lead_Source", "Email_Opt_Out", "Last_Activity_Time", "First_Name", "Salutation", "Rating", "Annual_Revenue", "Company", "$editable", "Lead_Status", "Last_Name", "Tag", "id", "Mobile", "State"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupModulesTableView()
-        self.getProfileImage()
+        //self.getProfileImage()
         self.setupPersonImageView()
         self.navigationItem.title = "Detials"
     }
@@ -80,7 +85,7 @@ class personViewController: UIViewController {
         
         modulesTableView.delegate = self
         modulesTableView.dataSource = self
-        modulesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Module")
+        modulesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "person")
         
         self.addConstraint(whichView: modulesTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
     }
@@ -105,12 +110,22 @@ extension personViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = modulesTableView.dequeueReusableCell(withIdentifier: "Module", for: indexPath)
-        
-        if let text : String = person[personKeys[indexPath.row]] as? String {
-            cell.textLabel?.text = text
+        var cell = modulesTableView.dequeueReusableCell(withIdentifier: "person", for: indexPath)
+        cell = UITableViewCell(style: .subtitle, reuseIdentifier: "person")
+        let objectOfRecord = self.crmRecord[0]
+        if let recordsValue : [String : Any] = objectOfRecord.getData() as? [String : Any]{
+            print(recordsValue)
+            let key : String = personKeys[indexPath.row]
+            
+            if let textValue : String = recordsValue[key] as? String {
+                cell.detailTextLabel?.text = textValue
+                cell.detailTextLabel?.font = .systemFont(ofSize: 24)
+            }
+            cell.textLabel?.text = key
+            cell.textLabel?.font = .systemFont(ofSize: 18)
+
         }
-        
+
         return cell
     }
     

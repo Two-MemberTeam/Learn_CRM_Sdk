@@ -18,7 +18,7 @@ class ModulesViewController: UIViewController {
         super.viewDidLoad()
         self.getModules()
         self.setupModulesTableView()
-    
+        
         self.navigationItem.title = "Modules"
     }
     
@@ -32,7 +32,11 @@ class ModulesViewController: UIViewController {
         self.addConstraint(whichView: modulesTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
     }
     
+    
+    
     func getModules(){
+        
+        
         ZCRMSDKUtil.getModules { (result) in
             switch result{
             case .success(let modules, let bulkResponce):
@@ -48,6 +52,11 @@ class ModulesViewController: UIViewController {
                 print(error)
             }
         }
+        
+        
+        
+        
+        
         
         
     }
