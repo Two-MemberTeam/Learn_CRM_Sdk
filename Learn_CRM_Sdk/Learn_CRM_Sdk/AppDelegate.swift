@@ -40,10 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let navController = UINavigationController( rootViewController : viewController )
                 self.window?.rootViewController = navController
                 self.window?.makeKeyAndVisible()
-//                let viewController = ListViewController()
-                //let navController = UINavigationController( rootViewController : viewController )
-                //self.window?.rootViewController = navController
-                //self.window?.makeKeyAndVisible()
+
             }
             catch
             {
