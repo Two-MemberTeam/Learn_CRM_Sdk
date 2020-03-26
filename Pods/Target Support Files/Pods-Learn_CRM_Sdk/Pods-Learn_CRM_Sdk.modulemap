@@ -1,0 +1,6 @@
+framework module Pods_Learn_CRM_Sdk {
+  umbrella header "Pods-Learn_CRM_Sdk-umbrella.h"
+
+  export *
+  module * { export * }
+}
