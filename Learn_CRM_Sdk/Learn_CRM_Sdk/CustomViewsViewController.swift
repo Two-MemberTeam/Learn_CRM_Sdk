@@ -65,14 +65,16 @@ extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSourc
         
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let LeadStatus : String = customViews[indexPath.row].displayName as! String
-        
-        cv_Delegate?.changeToCustomView(LeadStatus , indexPath.row)
-        
-        self.dismiss(animated: false, completion: nil)
-
-    }
+    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let LeadStatus : String = customViews[indexPath.row].displayName as! String
+//        
+//        cv_Delegate?.changeToCustomView(LeadStatus , indexPath.row)
+//        
+//        self.dismiss(animated: false, completion: nil)
+//
+//    }
     
     
 }

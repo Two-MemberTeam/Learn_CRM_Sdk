@@ -18,15 +18,11 @@ class personViewController: UIViewController {
     
     
     var person : [String : Any] = [String : Any]()
-    let personKeys : [String] = ["First_Name","Last_Name","Designation","Company","Lead_Source","Industry","Email","Skype_ID","Street","City","Country","Phone","Mobile"]
-    
-    //["Designation",  "Country", "Created_By", "Phone",  "Full_Name", "City", "Email", "Skype_ID", "Record_Image", "Fax", "Street", "No_of_Employees", "Website", "Secondary_Email", "Modified_By", "Industry",  "Modified_Time", "Description", "Owner", "Twitter", "Zip_Code", "Lead_Source", "Email_Opt_Out", "Last_Activity_Time", "First_Name", "Salutation", "Rating", "Annual_Revenue", "Company", "$editable", "Lead_Status", "Last_Name", "Tag", "id", "Mobile", "State"]
+    var personKeys : [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupModulesTableView()
-        //self.getProfileImage()
-        self.setupPersonImageView()
         self.navigationItem.title = "Detials"
     }
     
@@ -38,46 +34,6 @@ class personViewController: UIViewController {
         personImageView.layer.cornerRadius = width * 18
         personImageView.layer.borderWidth = 2
         personImageView.layer.masksToBounds = true
-    }
-    func getProfileImage(){
-        
-        let profileUrlString : String = person["Record_Image"] as! String
-        let profileUrl = URL(string: profileUrlString)
-        
-        ZohoAuth.getOauth2Token { ( token, error ) in
-            
-            if error == nil{
-                
-                var request = URLRequest(url: profileUrl!)
-                let oauthtoken = "Zoho-oauthtoken \(token!)"
-                request.setValue(oauthtoken, forHTTPHeaderField: "Authorization")
-                
-                let session = URLSession.shared
-                
-                let task = session.dataTask(with: request) { (data, response, error) in
-                    if(error == nil){
-                        
-                        if let imageData = data{
-                            DispatchQueue.main.async {
-                                self.personImageView.image = UIImage(data: imageData)
-                                
-                            }
-                        }
-                    }else{
-                        print(error as Any)
-                    }
-                    
-                }
-                task.resume()
-            }
-            
-            
-            
-        }
-        
-        
-        
-        
     }
     
     func setupModulesTableView(){
