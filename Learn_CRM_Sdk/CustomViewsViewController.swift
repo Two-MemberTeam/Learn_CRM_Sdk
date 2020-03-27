@@ -18,7 +18,7 @@ class CustomViewsViewController: UIViewController {
     let customViewTableView : UITableView = UITableView()
     var customViews : [ZCRMCustomView] = [ZCRMCustomView]()
 
-    var customViewRecords : [[String : Any]] = [[String : Any]]()
+
     var module_Name : String!
     var cv_Delegate : customViewDelegate?
     
@@ -61,12 +61,14 @@ extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSourc
         let cell = customViewTableView.dequeueReusableCell(withIdentifier: "customView", for: indexPath)
         
         let objectOfCustomView = customViews[indexPath.row]
-        cell.textLabel?.text = objectOfCustomView.displayName as? String
+        cell.textLabel?.text = objectOfCustomView.displayName
         
         return cell
     }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let LeadStatus : String = customViews[indexPath.row].displayName as! String
+        let LeadStatus : String = customViews[indexPath.row].displayName 
         
         cv_Delegate?.changeToCustomView(LeadStatus , indexPath.row)
         

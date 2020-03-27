@@ -36,14 +36,11 @@ class ModulesViewController: UIViewController {
     
     func getModules(){
         
-        
         ZCRMSDKUtil.getModules { (result) in
             switch result{
-            case .success(let modules, let bulkResponce):
+            case .success(let modules, _):
                 self.modules = modules
-                for module in self.modules {
-                    print(module.name)
-                }
+                
                 DispatchQueue.main.async {
                     self.modulesTableView.reloadData()
                 }
@@ -52,10 +49,6 @@ class ModulesViewController: UIViewController {
                 print(error)
             }
         }
-        
-        
-        
-        
         
         
         

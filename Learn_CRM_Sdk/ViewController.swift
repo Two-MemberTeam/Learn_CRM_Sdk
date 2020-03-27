@@ -82,12 +82,7 @@ class ViewController: UIViewController {
         getModulesButton.addTarget(self, action: #selector(NavigateToModulesViewController), for: .touchUpInside)
         
         getModulesButton.frame = CGRect(x: 100, y: 300, width: 200, height: 100)
-        
-        //        getModulesButton.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -200).isActive = true
-        //        getModulesButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 100).isActive = true
-        //        getModulesButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -100).isActive = true
-        //        getModulesButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100).isActive = true
-        
+                
         
     }
     
