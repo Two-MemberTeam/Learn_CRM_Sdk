@@ -23,16 +23,16 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = moduleName
         self.setupModuleListTableView()
-        self.getCustomeViewList(moduleName: moduleName)
+        self.getCustomeViewData(moduleName: moduleName)
         self.setupCustomViewListButton()
     }
     
     func changeToCustomView(customViewName: String , cvRow : Int) {
         self.customViewName = customViewName
         self.cvRow = cvRow
-        self.getCustomeViewList(moduleName: moduleName)
+        self.getCustomeViewData(moduleName: moduleName)
         self.navigationItem.title = customViewName
      }
     
@@ -46,15 +46,15 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
     }
     func setupCustomViewListButton(){
         self.view.addSubview(customViewListButton)
-        customViewListButton.setTitle("^", for: .normal)
         customViewListButton.setTitleColor(.white, for: .normal)
         customViewListButton.frame = CGRect(x: 0, y: 80, width: self.view.frame.width, height: 50)
         customViewListButton.addTarget(self, action: #selector(customViewList), for: .touchUpInside)
         customViewListButton.backgroundColor = .black
+        customViewListButton.titleLabel?.lineBreakMode = .byWordWrapping
     }
     
     
-    func getCustomeViewList(moduleName : String){
+    func getCustomeViewData(moduleName : String){
         
         ZCRMSDKUtil.getModuleDelegate(apiName: moduleName ).getCustomViews { (result) in
             switch result{
@@ -65,7 +65,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                     self.customViewName = self.customViews[self.cvRow].name
                     
                 }else{
-                    self.navigationItem.title = "No Records"
+                    self.customViewListButton.setTitle("No Records", for: .normal)
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
@@ -82,9 +82,10 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                 self.crmRecord = records
                 DispatchQueue.main.async {
                     if self.crmRecord.count != 0 {
-                        self.navigationItem.title = self.customViewName
+                        self.customViewListButton.setTitle("\(self.customViewName!)\n\t\t^", for: .normal)
+                        
                     }else{
-                        self.navigationItem.title = "No Records"
+                        self.customViewListButton.setTitle("No Records", for: .normal)
                     }
                     self.moduleRecordListTableView.reloadData()
                     
@@ -116,6 +117,8 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         self.present(CustomViewsVC, animated: true, completion: nil)
     }
     
+    
+    
 }
 
 extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSource {
@@ -126,7 +129,15 @@ extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = moduleRecordListTableView.dequeueReusableCell(withIdentifier: "moduleRecordList", for: indexPath)
         let record = self.crmRecord[indexPath.row]
-        
+        cell.textLabel?.text = gettheNameField(record: record)
+
+        return cell
+
+    }
+    
+    
+    func gettheNameField(record : ZCRMRecord ) -> String{
+        var NameField : String = String()
         do{
             if  self.moduleName == "Leads" ||  self.moduleName == "Contacts"{
                 ofFieldAPIName  = "Full_Name"
@@ -143,23 +154,24 @@ extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSou
             }
             
             if let name : String = try record.getString(ofFieldAPIName: ofFieldAPIName) {
-                cell.textLabel?.text = name
+                NameField = name
             }
             else if let recordDelegate : ZCRMRecordDelegate = try record.getZCRMRecordDelegate(ofFieldAPIName: ofFieldAPIName) {
                 if let name : String = recordDelegate.label {
-                    cell.textLabel?.text = name
+                    NameField = name
+
                 }
             }
            
             
         }catch{
             print("error - \(error)")
+
         }
-        return cell
         
+        return NameField
         
     }
-    
     
 }
 
