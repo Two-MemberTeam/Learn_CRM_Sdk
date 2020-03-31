@@ -11,30 +11,26 @@ import ZCRMiOS
 
 class ModulesViewController: UIViewController {
     
-    let modulesTableView : UITableView = UITableView()
+    let modulesListTableView : UITableView = UITableView()
     var modules : [ZCRMModule] = [ZCRMModule]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getModules()
-        self.setupModulesTableView()
+        self.setupModulesListTableView()
         
         self.navigationItem.title = "Modules"
     }
     
-    func setupModulesTableView(){
-        self.view.addSubview(modulesTableView)
-        
-        modulesTableView.delegate = self
-        modulesTableView.dataSource = self
-        modulesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Module")
-        
-        self.addConstraint(whichView: modulesTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
+    func setupModulesListTableView(){
+        self.view.addSubview(modulesListTableView)
+        modulesListTableView.delegate = self
+        modulesListTableView.dataSource = self
+        modulesListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Module")
+        self.addConstraint(whichView: modulesListTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
     }
     
-    
-    
-    func getModules(){
+     func getModules(){
         
         ZCRMSDKUtil.getModules { (result) in
             switch result{
@@ -42,16 +38,14 @@ class ModulesViewController: UIViewController {
                 self.modules = modules
                 
                 DispatchQueue.main.async {
-                    self.modulesTableView.reloadData()
+                    self.modulesListTableView.reloadData()
                 }
                 
             case .failure(let error):
                 print(error)
             }
         }
-        
-        
-        
+                
     }
     
     func addConstraint(whichView : UIView , forView : UIView , top : CGFloat , bottom : CGFloat , leading : CGFloat , trailing : CGFloat ){
@@ -64,7 +58,6 @@ class ModulesViewController: UIViewController {
         whichView.trailingAnchor.constraint(equalTo: forView.trailingAnchor, constant: trailing).isActive = true
     }
     
-    
 }
 
 extension ModulesViewController : UITableViewDelegate , UITableViewDataSource {
@@ -73,7 +66,7 @@ extension ModulesViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = modulesTableView.dequeueReusableCell(withIdentifier: "Module", for: indexPath)
+        let cell = modulesListTableView.dequeueReusableCell(withIdentifier: "Module", for: indexPath)
         
         let objectOfModule = modules[indexPath.row]
         cell.textLabel?.text = objectOfModule.name
@@ -85,10 +78,8 @@ extension ModulesViewController : UITableViewDelegate , UITableViewDataSource {
         let moduleRecordsVC  : ModuleRecordsViewController = ModuleRecordsViewController()
         let objectOfModule = modules[indexPath.row]
         let module_Name : String = objectOfModule.name
-        moduleRecordsVC.module_Name = module_Name
+        moduleRecordsVC.moduleName = module_Name
         self.navigationController?.pushViewController(moduleRecordsVC, animated: true)
     }
-    
-    
-    
+        
 }

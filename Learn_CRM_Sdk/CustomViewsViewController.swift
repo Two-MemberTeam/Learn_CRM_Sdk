@@ -10,22 +10,20 @@ import UIKit
 import ZCRMiOS
 
 protocol customViewDelegate : class{
-    func changeToCustomView(_ leadStatus : String , _ cvRow : Int)
+    func changeToCustomView(customViewName : String , cvRow : Int)
 }
 
 class CustomViewsViewController: UIViewController {
-
+    
     let customViewTableView : UITableView = UITableView()
     var customViews : [ZCRMCustomView] = [ZCRMCustomView]()
-
-
-    var module_Name : String!
+    
     var cv_Delegate : customViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCustomViewTableView()
-
+        
     }
     
     func setupCustomViewTableView(){
@@ -67,13 +65,14 @@ extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSourc
     }
     
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let LeadStatus : String = customViews[indexPath.row].displayName 
+        let customViewName : String = customViews[indexPath.row].displayName
         
-        cv_Delegate?.changeToCustomView(LeadStatus , indexPath.row)
+        cv_Delegate?.changeToCustomView(customViewName: customViewName , cvRow: indexPath.row)
         
         self.dismiss(animated: false, completion: nil)
-
+        
     }
     
     

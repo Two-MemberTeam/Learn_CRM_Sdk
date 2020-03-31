@@ -75,14 +75,11 @@ class ViewController: UIViewController {
     
     func setupGetModulesButton(){
         self.view.addSubview(getModulesButton)
-        
         getModulesButton.setTitle("Get Modules", for: .normal)
         getModulesButton.setTitleColor(.blue, for: .normal)
         getModulesButton.backgroundColor = .lightGray
         getModulesButton.addTarget(self, action: #selector(NavigateToModulesViewController), for: .touchUpInside)
-        
         getModulesButton.frame = CGRect(x: 100, y: 300, width: 200, height: 100)
-                
         
     }
     

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2750B5C22417612C0030CFF6 /* personViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750B5C12417612C0030CFF6 /* personViewController.swift */; };
 		2750B5C4241778B60030CFF6 /* CustomViewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */; };
 		27A84AB0240FB33E00DA45A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */; };
 		27A84AB2240FB33E00DA45A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AB1240FB33E00DA45A6 /* SceneDelegate.swift */; };
@@ -22,7 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2750B5C12417612C0030CFF6 /* personViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = personViewController.swift; sourceTree = "<group>"; };
 		2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewsViewController.swift; sourceTree = "<group>"; };
 		27A84AAC240FB33E00DA45A6 /* Learn_CRM_Sdk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn_CRM_Sdk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				27A84AEB241237DE00DA45A6 /* ModulesViewController.swift */,
 				27A84AED24125F1700DA45A6 /* ModuleRecordsViewController.swift */,
 				2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */,
-				2750B5C12417612C0030CFF6 /* personViewController.swift */,
 				27A84ABB240FB35500DA45A6 /* Assets.xcassets */,
 				27A84ABD240FB35500DA45A6 /* LaunchScreen.storyboard */,
 				27A84AC0240FB35500DA45A6 /* Info.plist */,
@@ -227,7 +224,6 @@
 				27A84AEE24125F1700DA45A6 /* ModuleRecordsViewController.swift in Sources */,
 				27A84AEC241237DE00DA45A6 /* ModulesViewController.swift in Sources */,
 				27A84ABA240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodeld in Sources */,
-				2750B5C22417612C0030CFF6 /* personViewController.swift in Sources */,
 				27A84AB2240FB33E00DA45A6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
