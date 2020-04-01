@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2750B5C4241778B60030CFF6 /* CustomViewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */; };
 		27A84AB0240FB33E00DA45A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */; };
-		27A84AB2240FB33E00DA45A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AB1240FB33E00DA45A6 /* SceneDelegate.swift */; };
 		27A84AB4240FB33E00DA45A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AB3240FB33E00DA45A6 /* ViewController.swift */; };
 		27A84ABA240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AB8240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodeld */; };
 		27A84ABC240FB35500DA45A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A84ABB240FB35500DA45A6 /* Assets.xcassets */; };
@@ -24,7 +23,6 @@
 		2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewsViewController.swift; sourceTree = "<group>"; };
 		27A84AAC240FB33E00DA45A6 /* Learn_CRM_Sdk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Learn_CRM_Sdk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27A84AB1240FB33E00DA45A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		27A84AB3240FB33E00DA45A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27A84AB9240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Learn_CRM_Sdk.xcdatamodel; sourceTree = "<group>"; };
 		27A84ABB240FB35500DA45A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */,
-				27A84AB1240FB33E00DA45A6 /* SceneDelegate.swift */,
 				27A84AB3240FB33E00DA45A6 /* ViewController.swift */,
 				27A84AEB241237DE00DA45A6 /* ModulesViewController.swift */,
 				27A84AED24125F1700DA45A6 /* ModuleRecordsViewController.swift */,
@@ -224,7 +221,6 @@
 				27A84AEE24125F1700DA45A6 /* ModuleRecordsViewController.swift in Sources */,
 				27A84AEC241237DE00DA45A6 /* ModulesViewController.swift in Sources */,
 				27A84ABA240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodeld in Sources */,
-				27A84AB2240FB33E00DA45A6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

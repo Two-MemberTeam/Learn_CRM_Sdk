@@ -33,7 +33,6 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         self.customViewName = customViewName
         self.cvRow = cvRow
         self.getCustomeViewData(moduleName: moduleName)
-        self.navigationItem.title = customViewName
      }
     
     func setupModuleListTableView(){
