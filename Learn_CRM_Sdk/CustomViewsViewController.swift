@@ -10,7 +10,7 @@ import UIKit
 import ZCRMiOS
 
 protocol customViewDelegate : class{
-    func changeToCustomView(customViewName : String , cvRow : Int)
+    func changeToCustomViewList(customViewName : String , cvRow : Int)
 }
 
 class CustomViewsViewController: UIViewController {
@@ -69,7 +69,7 @@ extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let customViewName : String = customViews[indexPath.row].displayName
         
-        cv_Delegate?.changeToCustomView(customViewName: customViewName , cvRow: indexPath.row)
+        cv_Delegate?.changeToCustomViewList(customViewName: customViewName , cvRow: indexPath.row)
         
         self.dismiss(animated: false, completion: nil)
         

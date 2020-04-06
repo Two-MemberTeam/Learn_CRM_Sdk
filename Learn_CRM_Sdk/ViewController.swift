@@ -21,7 +21,6 @@ class ViewController: UIViewController {
         self.showLogin()
         self.setupLogoutButton()
         self.setupGetModulesButton()
-        
     }
     
     func setupLogoutButton(){
@@ -47,9 +46,8 @@ class ViewController: UIViewController {
             }
         }
         
-        
     }
-    
+
     
     @objc func logout(){
         ZCRMSDKClient.shared.logout { ( success ) in
@@ -70,6 +68,10 @@ class ViewController: UIViewController {
                 
             }
         }
+        
+        
+        
+        
     }
     
     
@@ -85,12 +87,12 @@ class ViewController: UIViewController {
     
     
     @objc func NavigateToModulesViewController(){
-        let modulesviewController : ModulesViewController = ModulesViewController()
+        let modulesviewController : ModulesListViewController = ModulesListViewController()
         self.navigationController?.pushViewController(modulesviewController, animated: true)
         
         
     }
     
- 
+    
 }
 

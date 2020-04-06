@@ -14,7 +14,7 @@
 		27A84ABC240FB35500DA45A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A84ABB240FB35500DA45A6 /* Assets.xcassets */; };
 		27A84ABF240FB35500DA45A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A84ABD240FB35500DA45A6 /* LaunchScreen.storyboard */; };
 		27A84AC7240FB60000DA45A6 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27A84AC6240FB60000DA45A6 /* AppConfiguration.plist */; };
-		27A84AEC241237DE00DA45A6 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AEB241237DE00DA45A6 /* ModulesViewController.swift */; };
+		27A84AEC241237DE00DA45A6 /* ModulesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AEB241237DE00DA45A6 /* ModulesListViewController.swift */; };
 		27A84AEE24125F1700DA45A6 /* ModuleRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A84AED24125F1700DA45A6 /* ModuleRecordsViewController.swift */; };
 		EE4C238998ABA59EB44ABF9B /* Pods_Learn_CRM_Sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECD298D300AB53FC909DF05 /* Pods_Learn_CRM_Sdk.framework */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		27A84ABE240FB35500DA45A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27A84AC0240FB35500DA45A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A84AC6240FB60000DA45A6 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
-		27A84AEB241237DE00DA45A6 /* ModulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
+		27A84AEB241237DE00DA45A6 /* ModulesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesListViewController.swift; sourceTree = "<group>"; };
 		27A84AED24125F1700DA45A6 /* ModuleRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRecordsViewController.swift; sourceTree = "<group>"; };
 		97571F9644EF468857CCB210 /* Pods-Learn_CRM_Sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_CRM_Sdk.release.xcconfig"; path = "Target Support Files/Pods-Learn_CRM_Sdk/Pods-Learn_CRM_Sdk.release.xcconfig"; sourceTree = "<group>"; };
 		C6AB7D7EE0B59EB3689F827F /* Pods-Learn_CRM_Sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Learn_CRM_Sdk.debug.xcconfig"; path = "Target Support Files/Pods-Learn_CRM_Sdk/Pods-Learn_CRM_Sdk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			children = (
 				27A84AAF240FB33E00DA45A6 /* AppDelegate.swift */,
 				27A84AB3240FB33E00DA45A6 /* ViewController.swift */,
-				27A84AEB241237DE00DA45A6 /* ModulesViewController.swift */,
+				27A84AEB241237DE00DA45A6 /* ModulesListViewController.swift */,
 				27A84AED24125F1700DA45A6 /* ModuleRecordsViewController.swift */,
 				2750B5C3241778B60030CFF6 /* CustomViewsViewController.swift */,
 				27A84ABB240FB35500DA45A6 /* Assets.xcassets */,
@@ -219,7 +219,7 @@
 				27A84AB0240FB33E00DA45A6 /* AppDelegate.swift in Sources */,
 				2750B5C4241778B60030CFF6 /* CustomViewsViewController.swift in Sources */,
 				27A84AEE24125F1700DA45A6 /* ModuleRecordsViewController.swift in Sources */,
-				27A84AEC241237DE00DA45A6 /* ModulesViewController.swift in Sources */,
+				27A84AEC241237DE00DA45A6 /* ModulesListViewController.swift in Sources */,
 				27A84ABA240FB33E00DA45A6 /* Learn_CRM_Sdk.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

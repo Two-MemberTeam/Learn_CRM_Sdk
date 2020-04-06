@@ -11,7 +11,7 @@ import ZCRMiOS
 
 class ModuleRecordsViewController: UIViewController , customViewDelegate {
     
-    let moduleRecordListTableView : UITableView = UITableView()
+    let RecordListTableView : UITableView = UITableView()
     let customViewListButton : UIButton = UIButton()
     var customViews : [ZCRMCustomView] = [ZCRMCustomView]()
     var crmRecord : [ZCRMRecord] = [ZCRMRecord]()
@@ -25,46 +25,52 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         super.viewDidLoad()
         self.navigationItem.title = moduleName
         self.setupModuleListTableView()
-        self.getCustomeViewData(moduleName: moduleName)
+        self.getRecords(moduleName: moduleName)
         self.setupCustomViewListButton()
     }
     
-    func changeToCustomView(customViewName: String , cvRow : Int) {
+    func changeToCustomViewList(customViewName: String , cvRow : Int) {
         self.customViewName = customViewName
         self.cvRow = cvRow
-        self.getCustomeViewData(moduleName: moduleName)
+        self.getRecords(moduleName: moduleName)
      }
     
     func setupModuleListTableView(){
-        self.view.addSubview(moduleRecordListTableView)
-        moduleRecordListTableView.delegate = self
-        moduleRecordListTableView.dataSource = self
-        moduleRecordListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "moduleRecordList")
+        self.view.addSubview(RecordListTableView)
+        RecordListTableView.delegate = self
+        RecordListTableView.dataSource = self
+        RecordListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "RecordList")
         
-        self.addConstraint(whichView: moduleRecordListTableView, forView: self.view, top: 130, bottom: -30, leading: 0, trailing: 0)
+        self.addConstraint(whichView: RecordListTableView, forView: self.view, top: 135, bottom: -30, leading: 0, trailing: 0)
     }
+    
+    
     func setupCustomViewListButton(){
         self.view.addSubview(customViewListButton)
         customViewListButton.setTitleColor(.white, for: .normal)
-        customViewListButton.frame = CGRect(x: 0, y: 80, width: self.view.frame.width, height: 50)
-        customViewListButton.addTarget(self, action: #selector(customViewList), for: .touchUpInside)
+        customViewListButton.frame = CGRect(x: 0, y: 85, width: self.view.frame.width, height: 50)
+        customViewListButton.addTarget(self, action: #selector(showCustomViewList), for: .touchUpInside)
         customViewListButton.backgroundColor = .black
-        customViewListButton.titleLabel?.lineBreakMode = .byWordWrapping
     }
     
     
-    func getCustomeViewData(moduleName : String){
+    func getRecords(moduleName : String){
         
         ZCRMSDKUtil.getModuleDelegate(apiName: moduleName ).getCustomViews { (result) in
             switch result{
             case .success(let customViews, _):
                 self.customViews = customViews
                 if self.customViews.count != 0{
+                    
                     self.getRecords(moduleName : self.moduleName , cvId : self.customViews[self.cvRow].id)
-                    self.customViewName = self.customViews[self.cvRow].name
+                    
+                    self.customViewName = self.customViews[self.cvRow].displayName
                     
                 }else{
-                    self.customViewListButton.setTitle("No Records", for: .normal)
+                    DispatchQueue.main.async {
+                        self.customViewListButton.setTitle("No Records", for: .normal)
+
+                    }
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
@@ -79,14 +85,31 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
             switch result{
             case .success(let records, _):
                 self.crmRecord = records
+                
+                if  self.moduleName == "Leads" ||  self.moduleName == "Contacts"{
+                    self.ofFieldAPIName  = "Full_Name"
+                }
+                else if self.moduleName == "Invoices" || self.moduleName == "Quotes"{
+                    self.ofFieldAPIName  = "Subject"
+                }
+                else if self.moduleName == "Accounts" {
+                    self.ofFieldAPIName  = "Account_Name"
+                }
+                else if self.moduleName == "Deals" {
+                    self.ofFieldAPIName  = "Deal_Name"
+                }
+                else if self.moduleName == "Vendors" {
+                    self.ofFieldAPIName  = "Vendor_Name"
+                }
+                
                 DispatchQueue.main.async {
                     if self.crmRecord.count != 0 {
-                        self.customViewListButton.setTitle("\(self.customViewName!)\n\t\t^", for: .normal)
-                        
+                        self.customViewListButton.setTitle("\(self.customViewName!)", for: .normal)
                     }else{
                         self.customViewListButton.setTitle("No Records", for: .normal)
                     }
-                    self.moduleRecordListTableView.reloadData()
+                    
+                    self.RecordListTableView.reloadData()
                     
                 }
            case .failure(let error):
@@ -96,6 +119,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         }
         
     }
+    
     
      
     func addConstraint(whichView : UIView , forView : UIView , top : CGFloat , bottom : CGFloat , leading : CGFloat , trailing : CGFloat ){
@@ -109,14 +133,12 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
     }
     
     
-    @objc func customViewList(){
-        let CustomViewsVC  : CustomViewsViewController = CustomViewsViewController()
-        CustomViewsVC.customViews = self.customViews
-        CustomViewsVC.cv_Delegate = self
-        self.present(CustomViewsVC, animated: true, completion: nil)
+    @objc func showCustomViewList(){
+        let customViewsVC  : CustomViewsViewController = CustomViewsViewController()
+        customViewsVC.customViews = self.customViews
+        customViewsVC.cv_Delegate = self
+        self.present(customViewsVC, animated: true, completion: nil)
     }
-    
-    
     
 }
 
@@ -126,51 +148,23 @@ extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = moduleRecordListTableView.dequeueReusableCell(withIdentifier: "moduleRecordList", for: indexPath)
+        let cell = RecordListTableView.dequeueReusableCell(withIdentifier: "RecordList", for: indexPath)
         let record = self.crmRecord[indexPath.row]
-        cell.textLabel?.text = gettheNameField(record: record)
+        
+        do{
+            if let name : String = try record.getString(ofFieldAPIName: ofFieldAPIName) {
+                cell.textLabel?.text  = name
+            }
+            
+        }catch{
+            print("error - \(error)")
+        }
 
         return cell
 
     }
     
     
-    func gettheNameField(record : ZCRMRecord ) -> String{
-        var NameField : String = String()
-        do{
-            if  self.moduleName == "Leads" ||  self.moduleName == "Contacts"{
-                ofFieldAPIName  = "Full_Name"
-            }
-            else if self.moduleName == "Invoices" || self.moduleName == "Quotes"{
-                ofFieldAPIName  = "Account_Name"
-            }else if self.moduleName == "Notes" {
-                ofFieldAPIName  = "Parent_Id"
-            }
-            else if moduleName.last == "s"  {
-                var module : String = self.moduleName
-                module.removeLast()
-                ofFieldAPIName = "\(module)_Name"
-            }
-            
-            if let name : String = try record.getString(ofFieldAPIName: ofFieldAPIName) {
-                NameField = name
-            }
-            else if let recordDelegate : ZCRMRecordDelegate = try record.getZCRMRecordDelegate(ofFieldAPIName: ofFieldAPIName) {
-                if let name : String = recordDelegate.label {
-                    NameField = name
-
-                }
-            }
-           
-            
-        }catch{
-            print("error - \(error)")
-
-        }
-        
-        return NameField
-        
-    }
     
 }
 
