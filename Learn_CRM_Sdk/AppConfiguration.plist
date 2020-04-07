@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ClientID</key>
+	<string>1000.QRT0P3KALTYHC46ZRRK6YD9ZODMHGH</string>
+	<key>ClientSecretID</key>
+	<string>c46bde860d466435bd1309ab2f6aeb01954dad0ca7</string>
+	<key>RedirectURLScheme</key>
+	<string>learnZohoCRM</string>
+	<key>Type</key>
+	<string>ZCRM</string>
+	<key>ApiVersion</key>
+	<string>v2</string>
+	<key>DomainSuffix</key>
+	<string>com</string>
+	<key>AccessType</key>
+	<string>Production</string>
+	<key>AccountsURL</key>
+	<string>https://accounts.zoho.com</string>
+	<key>LoginCustomization</key>
+	<string>false</string>
+	<key>OAuthScopes</key>
+	<array>
+		<string>ZohoCRM.settings.ALL</string>
+		<string>ZohoCRM.modules.ALL</string>
+		<string>ZohoCRM.users.READ</string>
+		<string>ZohoCRM.org.READ</string>
+		<string>Aaaserver.profile.Read</string>
+		<string>profile.userphoto.READ</string>
+	</array>
+	<key>FirstLaunch</key>
+	<false/>
+	<key>ApiBaseURL</key>
+	<string>crm.zoho.com</string>
+	<key>PortalID</key>
+	<string>659472165</string>
+	<key>ShowSignUp</key>
+	<string>true</string>
+</dict>
+</plist>
