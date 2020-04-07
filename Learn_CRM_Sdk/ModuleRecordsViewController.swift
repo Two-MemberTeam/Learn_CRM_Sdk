@@ -20,11 +20,13 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
     var customViewName : String!
     var cvRow : Int = 0
     var ofFieldAPIName : String = String()
+    var isCustomModule : Bool = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = moduleName
         self.setupModuleListTableView()
+        self.setOfFieldAPIName()
         self.getRecords(moduleName: moduleName)
         self.setupCustomViewListButton()
     }
@@ -33,7 +35,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         self.customViewName = customViewName
         self.cvRow = cvRow
         self.getRecords(moduleName: moduleName)
-     }
+    }
     
     func setupModuleListTableView(){
         self.view.addSubview(RecordListTableView)
@@ -69,7 +71,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                 }else{
                     DispatchQueue.main.async {
                         self.customViewListButton.setTitle("No Records", for: .normal)
-
+                        
                     }
                 }
             case .failure(let error):
@@ -86,22 +88,6 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
             case .success(let records, _):
                 self.crmRecord = records
                 
-                if  self.moduleName == "Leads" ||  self.moduleName == "Contacts"{
-                    self.ofFieldAPIName  = "Full_Name"
-                }
-                else if self.moduleName == "Invoices" || self.moduleName == "Quotes"{
-                    self.ofFieldAPIName  = "Subject"
-                }
-                else if self.moduleName == "Accounts" {
-                    self.ofFieldAPIName  = "Account_Name"
-                }
-                else if self.moduleName == "Deals" {
-                    self.ofFieldAPIName  = "Deal_Name"
-                }
-                else if self.moduleName == "Vendors" {
-                    self.ofFieldAPIName  = "Vendor_Name"
-                }
-                
                 DispatchQueue.main.async {
                     if self.crmRecord.count != 0 {
                         self.customViewListButton.setTitle("\(self.customViewName!)", for: .normal)
@@ -112,16 +98,67 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                     self.RecordListTableView.reloadData()
                     
                 }
-           case .failure(let error):
+            case .failure(let error):
                 print("Error  -  \(error)")
                 self.navigationItem.title = "No Records"
             }
         }
         
     }
+
+    func getFieldList(moduleName: String){
+        
+        ZCRMSDKUtil.getModuleDelegate(apiName: moduleName ).getFields { (result) in
+            switch result{
+            case .success(let fields, _):
+                var arrayOfId : [Int64] = [Int64]()
+                for field in fields {
+                    arrayOfId.append(Int64(field.id))
+                }
+                arrayOfId.sort()
+                let firstId = arrayOfId[0]
+                
+                ZCRMSDKUtil.getModuleDelegate(apiName: moduleName ).getField(id: firstId) { (result) in
+                    switch result {
+                    case .success(let field, _):
+                        self.ofFieldAPIName = field.apiName
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+    }
     
+    func setOfFieldAPIName(){
+        
+        if  self.moduleName == "Leads" ||  self.moduleName == "Contacts"{
+            self.ofFieldAPIName  = "Full_Name"
+        }
+        else if self.moduleName == "Invoices" || self.moduleName == "Quotes"{
+            self.ofFieldAPIName  = "Subject"
+        }
+        else if self.moduleName == "Accounts" {
+            self.ofFieldAPIName  = "Account_Name"
+        }
+        else if self.moduleName == "Deals" {
+            self.ofFieldAPIName  = "Deal_Name"
+        }
+        else if self.moduleName == "Vendors" {
+            self.ofFieldAPIName  = "Vendor_Name"
+        }
+        else if self.isCustomModule {
+            self.getFieldList(moduleName: moduleName)
+        }
+        
+    }
     
-     
     func addConstraint(whichView : UIView , forView : UIView , top : CGFloat , bottom : CGFloat , leading : CGFloat , trailing : CGFloat ){
         
         whichView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,9 +196,9 @@ extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSou
         }catch{
             print("error - \(error)")
         }
-
+        
         return cell
-
+        
     }
     
     

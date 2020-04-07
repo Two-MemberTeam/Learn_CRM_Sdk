@@ -46,8 +46,9 @@ class ModulesListViewController: UIViewController {
             }
         }
         
+        
+        
     }
-    
     
     func addConstraint(whichView : UIView , forView : UIView , top : CGFloat , bottom : CGFloat , leading : CGFloat , trailing : CGFloat ){
         
@@ -82,8 +83,14 @@ extension ModulesListViewController : UITableViewDelegate , UITableViewDataSourc
         
         let objectOfModule = modules[indexPath.row]
         let moduleName : String = objectOfModule.pluralLabel
-        
         moduleRecordsVC.moduleName = moduleName
+
+        if objectOfModule.name.contains("CustomModule"){
+            moduleRecordsVC.isCustomModule = true
+        }else {
+            moduleRecordsVC.isCustomModule = false
+        }
+        
         self.navigationController?.pushViewController(moduleRecordsVC, animated: true)
     }
     

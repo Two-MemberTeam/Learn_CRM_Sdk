@@ -65,13 +65,9 @@ class ViewController: UIViewController {
                         }
                     }
                 }
-                
             }
         }
-        
-        
-        
-        
+  
     }
     
     
