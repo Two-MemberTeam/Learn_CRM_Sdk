@@ -9,7 +9,7 @@
 import UIKit
 import ZCRMiOS
 
-class ModuleRecordsViewController: UIViewController , customViewDelegate {
+class RecordListViewController: UIViewController , customViewDelegate {
     
     let RecordListTableView : UITableView = UITableView()
     let customViewListButton : UIButton = UIButton()
@@ -42,18 +42,18 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         RecordListTableView.delegate = self
         RecordListTableView.dataSource = self
         RecordListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "RecordList")
-        
-        self.addConstraint(whichView: RecordListTableView, forView: self.view, top: 135, bottom: -30, leading: 0, trailing: 0)
+        RecordListTableView.rowHeight = 36
+        self.addConstraint(whichView: RecordListTableView, forView: self.view, top: 129, bottom: -30, leading: 0, trailing: 0)
     }
     
     
     func setupCustomViewListButton(){
         self.view.addSubview(customViewListButton)
-        customViewListButton.setTitleColor(.white, for: .normal)
-        customViewListButton.frame = CGRect(x: 0, y: 85, width: self.view.frame.width, height: 50)
+        customViewListButton.setTitleColor(.systemBlue, for: .normal)
+        customViewListButton.frame = CGRect(x: 0, y: 89, width: self.view.frame.width, height: 40)
         customViewListButton.addTarget(self, action: #selector(showCustomViewList), for: .touchUpInside)
         customViewListButton.backgroundColor = .black
-        customViewListButton.titleLabel?.lineBreakMode = .byWordWrapping
+        customViewListButton.titleLabel?.numberOfLines = 2
         customViewListButton.titleLabel?.textAlignment = .center
 
     }
@@ -77,7 +77,9 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
-                self.showAlertforNoRecords(moduleName)
+                DispatchQueue.main.async {
+                    self.showAlertforNoRecords(moduleName)
+                }
             }
         }
         
@@ -94,13 +96,16 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                     if self.crmRecord.count == 0 {
                         self.showAlertforNoRecords(self.customViewName)
                     }
-                    self.customViewListButton.setTitle("\(self.customViewName!) \n\u{25BC}", for: .normal)
+                    self.customViewListButton.setTitle("\(self.customViewName!)\n\u{25BE}", for: .normal)
                     self.RecordListTableView.reloadData()
                     
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
-                self.showAlertforNoRecords(self.customViewName!)
+                DispatchQueue.main.async {
+                    self.showAlertforNoRecords(self.customViewName!)
+                }
+
             }
         }
         
@@ -171,7 +176,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
     
     
     @objc func showCustomViewList(){
-        let customViewsVC  : CustomViewsViewController = CustomViewsViewController()
+        let customViewsVC  : CustomViewListViewController = CustomViewListViewController()
         customViewsVC.customViews = self.customViews
         customViewsVC.cv_Delegate = self
         self.present(customViewsVC, animated: true, completion: nil)
@@ -181,16 +186,16 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         let alert = UIAlertController(title: "No Records", message: "in \(message)", preferredStyle: .alert)
                 
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (alert) in
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         }))
 
         self.present(alert, animated: true, completion: nil)
-        
+
     }
     
 }
 
-extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSource {
+extension RecordListViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.crmRecord.count
     }
@@ -211,7 +216,6 @@ extension ModuleRecordsViewController : UITableViewDelegate , UITableViewDataSou
         return cell
         
     }
-    
     
     
 }

@@ -27,7 +27,7 @@ class ModulesListViewController: UIViewController {
         modulesListTableView.delegate = self
         modulesListTableView.dataSource = self
         modulesListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Module")
-        self.addConstraint(whichView: modulesListTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
+        self.addConstraint(whichView: modulesListTableView, forView: self.view, top: 88, bottom: -30, leading: 0, trailing: 0)
     }
     
     func showModuleList(){
@@ -79,7 +79,7 @@ extension ModulesListViewController : UITableViewDelegate , UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let moduleRecordsVC  : ModuleRecordsViewController = ModuleRecordsViewController()
+        let moduleRecordsVC  : RecordListViewController = RecordListViewController()
         
         let objectOfModule = modules[indexPath.row]
         let moduleName : String = objectOfModule.pluralLabel

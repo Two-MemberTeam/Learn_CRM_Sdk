@@ -13,7 +13,7 @@ protocol customViewDelegate : class{
     func changeToCustomViewList(customViewName : String , cvRow : Int)
 }
 
-class CustomViewsViewController: UIViewController {
+class CustomViewListViewController: UIViewController {
     
     let customViewTableView : UITableView = UITableView()
     var customViews : [ZCRMCustomView] = [ZCRMCustomView]()
@@ -50,7 +50,7 @@ class CustomViewsViewController: UIViewController {
     
 }
 
-extension CustomViewsViewController : UITableViewDelegate , UITableViewDataSource {
+extension CustomViewListViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customViews.count
     }

@@ -62,8 +62,8 @@
                   urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
                   offsetFromSymbolStart = "27">
                </Location>
                <Location
@@ -77,8 +77,8 @@
                   urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "55"
-                  endingLineNumber = "55"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
                   offsetFromSymbolStart = "136">
                </Location>
             </Locations>
@@ -110,8 +110,8 @@
                   urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
                   offsetFromSymbolStart = "14">
                </Location>
                <Location
@@ -125,8 +125,8 @@
                   urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
@@ -196,6 +196,70 @@
             startingLineNumber = "71"
             endingLineNumber = "71"
             landmarkName = "logout()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C78FDD8A-8A91-494A-A426-A6A69765EC66"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Learn_CRM_Sdk/ModuleRecordsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "getRecords(moduleName:cvId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C78FDD8A-8A91-494A-A426-A6A69765EC66 - 80d4b30050fc7c38"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ZCRMiOS.Result.DataResponse&lt;Swift.Array&lt;ZCRMiOS.ZCRMRecord&gt;, ZCRMiOS.BulkAPIResponse&gt;) -&gt; () in Learn_CRM_Sdk.ModuleRecordsViewController.getRecords(moduleName: Swift.String, cvId: Swift.Int64) -&gt; ()"
+                  moduleName = "Learn_CRM_Sdk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ModuleRecordsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "342">
+               </Location>
+               <Location
+                  uuid = "C78FDD8A-8A91-494A-A426-A6A69765EC66 - f2b313a99da1af6c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (ZCRMiOS.Result.DataResponse&lt;Swift.Array&lt;ZCRMiOS.ZCRMRecord&gt;, ZCRMiOS.BulkAPIResponse&gt;) -&gt; () in Learn_CRM_Sdk.ModuleRecordsViewController.getRecords(moduleName: Swift.String, cvId: Swift.Int64) -&gt; ()"
+                  moduleName = "Learn_CRM_Sdk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zu-ios/Zoho%20Docs/Swift/Learn/CrmSdkLearing/Learn_CRM_Sdk/Learn_CRM_Sdk/ModuleRecordsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C52A1A4C-0588-48F6-8374-AB7A9594892F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Learn_CRM_Sdk/ModuleRecordsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "setupModuleListTableView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
