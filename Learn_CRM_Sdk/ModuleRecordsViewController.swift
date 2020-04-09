@@ -53,6 +53,9 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         customViewListButton.frame = CGRect(x: 0, y: 85, width: self.view.frame.width, height: 50)
         customViewListButton.addTarget(self, action: #selector(showCustomViewList), for: .touchUpInside)
         customViewListButton.backgroundColor = .black
+        customViewListButton.titleLabel?.lineBreakMode = .byWordWrapping
+        customViewListButton.titleLabel?.textAlignment = .center
+
     }
     
     
@@ -62,20 +65,19 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
             switch result{
             case .success(let customViews, _):
                 self.customViews = customViews
+
                 if self.customViews.count != 0{
-                    
                     self.getRecords(moduleName : self.moduleName , cvId : self.customViews[self.cvRow].id)
-                    
                     self.customViewName = self.customViews[self.cvRow].displayName
-                    
-                }else{
+                }
+                else{
                     DispatchQueue.main.async {
-                        self.customViewListButton.setTitle("No Records", for: .normal)
-                        
+                        self.showAlertforNoRecords(moduleName)
                     }
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
+                self.showAlertforNoRecords(moduleName)
             }
         }
         
@@ -89,24 +91,22 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
                 self.crmRecord = records
                 
                 DispatchQueue.main.async {
-                    if self.crmRecord.count != 0 {
-                        self.customViewListButton.setTitle("\(self.customViewName!)", for: .normal)
-                    }else{
-                        self.customViewListButton.setTitle("No Records", for: .normal)
+                    if self.crmRecord.count == 0 {
+                        self.showAlertforNoRecords(self.customViewName)
                     }
-                    
+                    self.customViewListButton.setTitle("\(self.customViewName!) \n\u{25BC}", for: .normal)
                     self.RecordListTableView.reloadData()
                     
                 }
             case .failure(let error):
                 print("Error  -  \(error)")
-                self.navigationItem.title = "No Records"
+                self.showAlertforNoRecords(self.customViewName!)
             }
         }
         
     }
 
-    func getFieldList(moduleName: String){
+    func getOfFieldAPIName(moduleName: String){
         
         ZCRMSDKUtil.getModuleDelegate(apiName: moduleName ).getFields { (result) in
             switch result{
@@ -154,7 +154,7 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
             self.ofFieldAPIName  = "Vendor_Name"
         }
         else if self.isCustomModule {
-            self.getFieldList(moduleName: moduleName)
+            self.getOfFieldAPIName(moduleName: moduleName)
         }
         
     }
@@ -175,6 +175,17 @@ class ModuleRecordsViewController: UIViewController , customViewDelegate {
         customViewsVC.customViews = self.customViews
         customViewsVC.cv_Delegate = self
         self.present(customViewsVC, animated: true, completion: nil)
+    }
+    
+    func showAlertforNoRecords(_ message : String){
+        let alert = UIAlertController(title: "No Records", message: "in \(message)", preferredStyle: .alert)
+                
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (alert) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
 }

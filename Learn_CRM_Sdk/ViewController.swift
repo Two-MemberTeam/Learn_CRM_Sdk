@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let getModulesButton : UIButton = UIButton()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+         super.viewDidLoad()
         view.backgroundColor = .white
         self.showLogin()
         self.setupLogoutButton()
@@ -34,14 +34,21 @@ class ViewController: UIViewController {
     }
     
     func showLogin(){
-        DispatchQueue.main.async {
-            ZCRMSDKClient.shared.showLogin { ( success ) in
-                if( success == true )
-                {
-                    print( "Login successful" )
-                }
-                else{
-                    print( "unable to show login")
+        ZCRMSDKClient.shared.isUserSignedIn { (isUserSignedIn) in
+            if isUserSignedIn {
+                print( "Already User Signed In")
+            }
+            else{
+                DispatchQueue.main.async {
+                    ZCRMSDKClient.shared.showLogin { ( success ) in
+                        if( success == true )
+                        {
+                            print( "Login successful" )
+                        }
+                        else{
+                            print( "unable to show login")
+                        }
+                    }
                 }
             }
         }

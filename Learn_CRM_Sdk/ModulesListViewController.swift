@@ -16,7 +16,7 @@ class ModulesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getModulesList()
+        self.showModuleList()
         self.setupModulesListTableView()
         
         self.navigationItem.title = "Modules"
@@ -30,7 +30,7 @@ class ModulesListViewController: UIViewController {
         self.addConstraint(whichView: modulesListTableView, forView: self.view, top: 60, bottom: -30, leading: 0, trailing: 0)
     }
     
-    func getModulesList(){
+    func showModuleList(){
         
         ZCRMSDKUtil.getModules { (result) in
             switch result{
